@@ -14,7 +14,7 @@ interface IProp {
 
 
 const FeaturedArticle = ({ article, path }: IProp) => {
-    const router = useRouter();
+const router = useRouter();
     const gotoPath = (e: any) => {
         e.preventDefault()
         router.push(transformPath(path))

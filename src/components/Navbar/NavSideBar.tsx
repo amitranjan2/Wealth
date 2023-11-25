@@ -57,7 +57,7 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
                                 <NavCatergoryDD label={each.label} openDD={openDD} setOpenDD={() => setOpenDD(!openDD)} />
                         ))
                     }
-                    {
+                    {/* {
                         env === 'development' ?
                             <>
                                 <hr />
@@ -91,7 +91,7 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
                                 </LinkTo>
                             </>
                             : null
-                    }
+                    } */}
 
                 </div>
                 <hr />
@@ -116,7 +116,7 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
                     </button>
                 </div>
                 <hr />
-                <div className='my-5'>
+                {/* <div className='my-5'>
                     <p className='text-sm font-light dark:text-gray-400 text-gray-500 mb-1'>Copyright © 2022</p>
                     <LinkTo href="/privacy-policy" passHref className='text-sm font-light dark:text-gray-400 text-gray-500 pr-3'>
                         Privacy Policy
@@ -124,7 +124,7 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
                     <LinkTo href="/terms-and-condition" passHref className='text-sm font-light dark:text-gray-400 text-gray-500'>
                         Terms and Conditions
                     </LinkTo>
-                </div>
+                </div> */}
             </aside>
         </>
     )

@@ -6,7 +6,8 @@ const nextConfig = {
   images: {
     loader: "akamai",
     path: "",
-  }
+  },
+  pageExtensions: ['ts', 'tsx']
 };
 
 module.exports = nextConfig
