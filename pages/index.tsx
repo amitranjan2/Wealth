@@ -11,7 +11,7 @@ const Home = () => {
   return (
   
     <PageLayout home PAGE_SEO={DEFAULT_SEO}>
-      <section className='w-full md:pt-[100px] md:pb-[70px] pt-[130px] pb-20 mb-10 dark:bg-slate-800 bg-slate-200'>
+      <section className='w-full md:pt-[100px] md:pb-[70px] pt-[130px] pb-20 mb-10 dark:bg-slate-800 bg-gradient-to-r from-teal-400 to-yellow-200'>
         <div className="container text-center px-3">
           <Text title className='text-3xl'>
             Blog template using Next Js, Typescript and Taildwind CSS

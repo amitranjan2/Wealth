@@ -14,6 +14,7 @@ export default function Home() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   console.log("Response Status: jwtToken", Cookies.get("jwtToken"));
 
@@ -42,6 +43,13 @@ export default function Home() {
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
 
+    if (!username || !password) {
+      toast.error("Username and password are required.", {
+        position: toast.POSITION.TOP_RIGHT,
+      });
+      return;
+    }
+
     const expirationInMinutes = 2;
     const expirationDate = new Date(
       new Date().getTime() + expirationInMinutes * 60 * 1000
@@ -49,6 +57,8 @@ export default function Home() {
 
     // Make a POST request to the login API
     try {
+      console.log("Response Status: jwtToken", Cookies.get("jwtToken"));
+      setLoading(true); 
 
       if (!navigator.onLine) {
         // Handle case where there is no internet connection
@@ -96,7 +106,18 @@ export default function Home() {
         );
 
         setTimeout(() => {
-          router.push("/");
+          const encodedCurrentPathname = Cookies.get('currentPathname');
+          // Clear the cookie
+          Cookies.remove('currentPathname');
+      
+          // If the cookie is present, redirect the user back to the original page
+          if (encodedCurrentPathname) {
+            const currentPathname = decodeURIComponent(encodedCurrentPathname);
+            router.push(currentPathname);
+          } else {
+            // Redirect to the home page or a default route
+            router.push('/');
+          }
         }, 1000);
       } else {
         // Handle login failure, e.g., display an error message
@@ -118,10 +139,14 @@ export default function Home() {
             toast.error(`HTTP error: ${response.status}. Please try again.`, {
               position: toast.POSITION.TOP_RIGHT,
             });
+           
           }
-          return;
+     
         }
-
+        setUsername("");
+        setPassword("");
+        setLoading(false); 
+        return;
 
       }
     } catch (error: any) {
@@ -147,13 +172,14 @@ export default function Home() {
     }
     setUsername("");
     setPassword("");
+    setLoading(false); 
   };
 
   return (
     <>
-      <div className="bg-gradient-to-r block h-screen items-center justify-center p-4 md:flex">
+      <div className="bg-gradient-to-r from-blue-200 to-cyan-200 block h-screen items-center justify-center p-4 md:flex">
         <div className="bg-cover bg-image flex flex-col items-center max-w-screen-lg overflow-hidden rounded-1g shadow-lg text-gray-600 w-full md:flex-row shadow-10xl rounded-2xl">
-          <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2 bg-green-500 shadow-10xl  ">
+          <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2 bg-gradient-to-r from-violet-200 to-pink-200 shadow-10xl  ">
             <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2">
               <h2 className="text-2xl font-bold mb-2">Hello, Friend!</h2>
               <div className="border-2 w-10 border-white inline-block mb-2"></div>
@@ -208,12 +234,40 @@ export default function Home() {
               </div>
 
               <button
-                className="bg-green-400 font-medium inline-flex items-center  px-3 py-1 rounded-md shadow-md text-white transition hover:bg-white hover:text-green-500"
-                type="submit"
-              >
-                <FaUser className="mr-2" />
-                Login now
-              </button>
+              className="bg-green-400 font-medium inline-flex items-center px-3 py-1 rounded-md shadow-md text-white transition hover:bg-white hover:text-green-500"
+              type="submit"
+              disabled={loading} // Disable button when loading
+            >
+              {loading ? (
+                // Show a loading spinner when loading
+                <svg
+                  className="animate-spin h-5 w-5 mr-3"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5a8 8 0 018-8h4a10 10 0 00-4-8.66"
+                  ></path>
+                </svg>
+              ) : (
+                // Show "Login now" text when not loading
+                <>
+                  <FaUser className="mr-2" />
+                  Login now
+                </>
+              )}
+            </button>
             </form>
           </div>
         </div>

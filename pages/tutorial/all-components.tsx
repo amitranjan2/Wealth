@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import SkeletonLoader from "./SkeletonLoader";
 import {
   PageLayout,
   Text,
@@ -153,11 +154,11 @@ const AllComponents = () => {
                 Style Guide
               </LinkTo>
             </div>
-            <div className="md:rounded-lg md:p-3 bg-white dark:bg-slate-800 shadow-md overflow-auto md:text-xl text-md font-semibold whitespace-nowrap md:block hidden">
+            {/* <div className="md:rounded-lg md:p-3 bg-white dark:bg-slate-800 shadow-md overflow-auto md:text-xl text-md font-semibold whitespace-nowrap md:block hidden">
               <LinkTo href="/pages/tutorial/style-guide.tsx">
                 Style Guide
               </LinkTo>
-            </div>
+            </div> */}
           </aside>
 
           {/* components */}
