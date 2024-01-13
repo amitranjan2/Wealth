@@ -39,15 +39,15 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
 
             <aside className={combineClasses(classes.nav_sidebar_wrapper, openSidebar && classes.open, 'dark:bg-slate-900 dark:text-white bg-white text-black')}>
                 <div className='flex items-center justify-between pb-3' onClick={closeNavSidebar}>
-                    <p className=''>menu</p>
-                    <div><MdOutlineClose className='text-slate-800 dark:text-white text-[25px]' /></div>
+                    <p className='mx-13 my-3  hover:text-green-500 shadow-md hover:shadow-lg hover:shadow-pink transition-all mb-3 md:mx-5 transform hover:scale-105'>menu</p>
+                    <div><MdOutlineClose className='text-slate-800 dark:text-white text-[25px] hover:text-green-500 transition-all mb-3 md:mx-5 transform hover:scale-105' /></div>
                 </div>
                 <hr />
                 <div className='my-15'>
                     {
                         navSetup.sideNavLinks.map((each: iNavLink, i: any) => (
                             each.type !== 'dropdown' ? !each.newTab ?
-                                <LinkTo href={each.path} key={i} passHref className='text-[16px] block my-3'>
+                                <LinkTo href={each.path} key={i} passHref className='text-[16px] block my-3  hover:text-green-500 shadow-md hover:shadow-lg hover:shadow-pink transition-all mb-3 md:mx-5 transform hover:scale-105 '>
                                     {each.label}
                                 </LinkTo> :
                                 <a href={each.path} key={each.path} target="_blank" rel="noopener noreferrer" className='text-[16px] block my-3 flex-wrap'>
@@ -57,50 +57,16 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
                                 <NavCatergoryDD label={each.label} openDD={openDD} setOpenDD={() => setOpenDD(!openDD)} />
                         ))
                     }
-                    {/* {
-                        env === 'development' ?
-                            <>
-                                <hr />
-                                <Text subtitle className='mt-3 !text-[18px]'>Examples and tutorials</Text>
-                                <LinkTo href='/pages/tutorial/all-components.tsx' passHref className='text-[16px] block my-3'>
-                                    All Components
-                                </LinkTo>
-                                <LinkTo href='/pages/tutorial/style-guide.tsx' passHref className='text-[16px] block my-3'>
-                                    Style Guide
-                                </LinkTo>
-                                <LinkTo href='/pages/tutorial/home-layout.tsx' passHref className='text-[16px] block my-3'>
-                                    Home Page Layout
-                                </LinkTo>
-                                <LinkTo href='/pages/tutorial/blog-with-sidebar-layout.tsx' passHref className='text-[16px] block my-3'>
-                                    Page Layout for article with sidebar
-                                </LinkTo>
-                                <LinkTo href='/pages/tutorial/blog-with-centered-layout.tsx' passHref className='text-[16px] block my-3'>
-                                    Page Layout for centered article
-                                </LinkTo>
-                                <LinkTo href='/pages/tutorial/how-to-setup-blog.tsx' passHref className='text-[16px] block my-3'>
-                                    How to setup your blog
-                                </LinkTo>
-                                <LinkTo href='/pages/tutorial/how-to-write-your-first-article.tsx' passHref className='text-[16px] block my-3'>
-                                    How to write your first article
-                                </LinkTo>
-                                <LinkTo href='/pages/tutorial/how-to-deploy-blog.tsx' passHref className='text-[16px] block my-3'>
-                                    How to export the blog
-                                </LinkTo>
-                                <LinkTo href='/pages/tutorial/icons.tsx' passHref className='text-[16px] block my-3'>
-                                    Icons
-                                </LinkTo>
-                            </>
-                            : null
-                    } */}
+            
 
                 </div>
                 <hr />
                 <div className='my-5'>
                     {
                         navSetup.socials && <>
-                            <p className='font-light'>Follow us : </p> {
+                            <p className='font-light hover:text-green-500 transition-all mb-3 md:mx-5 transform hover:scale-105'>Follow us : </p> {
                                 navSetup.socials.map((each: iNavSocials) => (
-                                    <a href={each.link} key={each.link} target="_blank" rel="noopener noreferrer" className='text-[28px] inline-block mr-5 mt-2'>{each.icon}</a>
+                                    <a href={each.link} key={each.link} target="_blank" rel="noopener noreferrer" className='text-[28px] inline-block mr-5 mt-2 hover:text-pink-400 transition-all mb-3 md:mx-5 transform hover:scale-105'>{each.icon}</a>
                                 ))
                             }
                             <hr className='mt-5' />
@@ -108,10 +74,10 @@ const NavSidebar = ({ openSidebar = false, closeNavSidebar, navSetup, changeThem
                     }
                 </div>
                 <div className='mt-5 mb-4'>
-                    <p className='mb-2 font-light'>Switch To {theme === THEMES.LIGHT ? 'Dark' : 'Light'} Theme :</p>
-                    <button name="theme-switch" aria-label="theme-switch" className={combineClasses(classes.theme_switch, 'dark:text-white text-black')} onClick={() => changeTheme()}>
+                    <p className='mb-3 font-light hover:text-green-500 transition-all md:mx-5 transform hover:scale-105'>Switch To {theme === THEMES.LIGHT ? 'Dark' : 'Light'} Theme :</p>
+                    <button name="theme-switch" aria-label="theme-switch" className={combineClasses(classes.theme_switch, 'dark:text-white text-black hover:text-green-500 transition-all mb-3 md:mx-5 transform hover:scale-105')} onClick={() => changeTheme()}>
                     {
-                            theme === THEMES.DARK ? <BsFillSunFill className="text-2xl" /> : <BsFillMoonFill className="text-lg" />
+                            theme === THEMES.DARK ? <BsFillSunFill className="text-2xl hover:text-green-500 transition-all mb-3 md:mx-5 transform hover:scale-105'" /> : <BsFillMoonFill className="text-lg hover:text-green-500 transition-all mb-3 md:mx-5 transform hover:scale-105" />
                         }
                     </button>
                 </div>

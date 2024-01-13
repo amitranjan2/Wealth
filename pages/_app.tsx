@@ -29,7 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <NextSeo {...SEO_CONFIG} />
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/WealthInSync.jpeg" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, minimum-scale=1"

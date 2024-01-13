@@ -1,72 +1,134 @@
 import { LogoType, NavbarType } from "../src/shared/enums";
 import { IAuthor, iNavSetup, iSEO } from "../src/shared/interfaces";
 import { AiFillGithub, AiOutlineTwitter, AiFillLinkedin, AiFillInstagram, AiFillFacebook } from "react-icons/ai";
-
-/**
- * EXAMPLE AUTHOR
- * 
- export const AUTHOR_NAME: IAuthor = {
-    name: "Full Name",
-    designation: "Work Designation",
-    bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    profilePic: "",
-     social: [
-        {
-            icon: <AiFillGithub />,
-            link: 'https://github.com/'
-        },
-        {
-            icon: <AiFillLinkedin />,
-            link: 'https://www.linkedin.com/'
-        },
-    ]
-}
- */
+import Cookies from "js-cookie";
+interface iNavLink {
+    label: string;
+    path: string;
+    type?: string | null;
+  }
 
 export const MAYUR: IAuthor = {
-    name: "Mayur Nalwala",
+    name: "",
     designation: "Software Engineer",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     profilePic: "",
     social: [
         {
             icon: <AiFillGithub />,
-            link: 'https://github.com/nmayur'
+            link: ''
         },
         {
             icon: <AiFillLinkedin />,
-            link: 'https://www.linkedin.com/in/mayur-nalwala/'
+            link: ''
         },
     ]
 }
 
 export const RUPALI: IAuthor = {
-    name: "Rupali Yadav",
+    name: "",
     designation: "IT Analyst",
     bio: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     profilePic: "",
     social: [
         {
             icon: <AiFillGithub />,
-            link: 'https://github.com/rupali-yadav'
+            link: ''
         },
         {
             icon: <AiFillLinkedin />,
-            link: 'https://www.linkedin.com/in/rupali-yadav-087bb4112/'
+            link: ''
         },
     ]
 }
 
 
 // This can your company name / your name etc for SEO purposes
-export const WEBSITE_NAME: string = 'Next Js Blog Template';
-export const WEBSITE_URL: string = 'https://nextjs-simple-blog-template.web.app/';
+export const WEBSITE_NAME: string = 'WealthInSync';
+export const WEBSITE_URL: string = '';
 
 /**
  * This is the main navigation setup.
  * This includes the main navbar and the side drawer.
  */
+
 export const PRIMARY_NAV: iNavSetup = {
+    type: NavbarType.DEFAULT,
+    logo: {
+      type: LogoType.TEXT,
+      logo: 'WealthInSync',
+    },
+    navLinks: [],
+    sideNavLinks: [],
+    socials: [
+      {
+        link: 'https://www.instagram.com/wealthinsync/',
+        icon: <AiFillInstagram />
+      },
+    ]
+  };
+
+  const CACHE_KEY = 'apiDataCacheNavBar';
+const CACHE_DURATION = 30 * 60 * 1000;  // 30 minutes in milliseconds
+
+
+const fetchData = async () => {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        const currentTime = Date.now();
+  
+        if (cachedData) {
+          const { data, timestamp } = JSON.parse(cachedData);
+  
+          if (currentTime - timestamp <= CACHE_DURATION) {
+            // Use cached data if not older than CACHE_DURATION
+            updateNavLinks(data);
+            return;
+          }
+        }
+  
+        // Fetch new data if there is no cached data or cached data is too old
+        const response = await fetch('http://localhost:8002/internal/homepage/navbar');
+        const newData = await response.json();
+  
+        // Update navLinks and sideNavLinks based on the API response
+        PRIMARY_NAV.navLinks = parseApiLinks(newData.ctaDtoList);
+        PRIMARY_NAV.sideNavLinks = parseApiLinks(newData.ctaDtoList);
+  
+        // Cache the new data with a timestamp
+        const cacheObject = { data: newData, timestamp: currentTime };
+        localStorage.setItem(CACHE_KEY, JSON.stringify(cacheObject));
+      }
+    } catch (error) {
+      console.error('Error fetching navLinks:', error);
+      return;
+    }
+  };
+
+  
+  const parseApiLinks = (apiLinks: any[]): iNavLink[] => {
+    return apiLinks
+      .filter((link) => !(link.type === 'JOIN' && Cookies.get('jwtToken'))) // Exclude items with type 'JOIN' and jwtToken present
+      .map((link) => ({
+        label: link.title,
+        path: link.hrefLink,
+        type: link.type,
+      }));
+  };
+  
+  
+  const updateNavLinks = (data: any) => {
+    PRIMARY_NAV.navLinks = parseApiLinks(data.ctaDtoList);
+    PRIMARY_NAV.sideNavLinks = parseApiLinks(data.ctaDtoList);
+  };
+  
+  fetchData();
+
+  /*
+export const PRIMARY_NAV: iNavSetup = {
+
+    
     type: NavbarType.DEFAULT,
     // max logo image height 40px
     // you can add logo light version if using image
@@ -77,7 +139,7 @@ export const PRIMARY_NAV: iNavSetup = {
     // },
     logo: {
         type: LogoType.TEXT,
-        logo: 'Next Blog',
+        logo: 'WealthInSync',
     },
     // navLinks are the main navbar links that apper on top of every page
     navLinks: [
@@ -93,7 +155,8 @@ export const PRIMARY_NAV: iNavSetup = {
         },
         {
             label: 'About Us',
-            path: '/about-us'
+            path: '/about-us',
+            type:''
         },
         // {
         //     // to open a link in new tab pass newTab: true
@@ -147,7 +210,7 @@ export const PRIMARY_NAV: iNavSetup = {
         //     icon: <AiOutlineTwitter />
         // },
     ]
-}
+} */
 
 export const DEFAULT_SEO: iSEO = {
     title: "Nextjs simple blog template",

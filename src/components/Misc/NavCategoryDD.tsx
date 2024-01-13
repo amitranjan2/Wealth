@@ -39,9 +39,9 @@ const NavCatergoryDD = ({
           )}
         >
           <LinkTo href={"/blog"} passHref className="block text-sm py-2 px-2">
-            <span onClick={() => setOpenDD(!openDD)}>All Articles</span>
+            <span onClick={() => setOpenDD(!openDD)}>All Articless</span>
           </LinkTo>
-          {CATEGORIES.map((each) => (
+          {/* {CATEGORIES.map((each) => (
             <LinkTo
               href={"/blog?category=" + each}
               key={each}
@@ -55,7 +55,7 @@ const NavCatergoryDD = ({
                 {each}
               </span>
             </LinkTo>
-          ))}
+          ))} */}
         </div>
       </div>
     </>

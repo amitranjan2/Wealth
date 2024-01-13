@@ -6,6 +6,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { middleware } from "../../middleware";
 import { useEffect } from "react";
 
+import PageLayout from "../../src/layouts/PageLayouts";
+
 import { useRouter } from "next/router";
 import { apiMiddleware } from '../apiMiddleware';
 export default function Home() {
@@ -176,43 +178,42 @@ export default function Home() {
   };
 
   return (
-    <>
-      <div className="bg-gradient-to-r from-blue-200 to-cyan-200 block h-screen items-center justify-center p-4 md:flex">
-        <div className="bg-cover bg-image flex flex-col items-center max-w-screen-lg overflow-hidden rounded-1g shadow-lg text-gray-600 w-full md:flex-row shadow-10xl rounded-2xl">
-          <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2 bg-gradient-to-r from-violet-200 to-pink-200 shadow-10xl  ">
-            <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2">
-              <h2 className="text-2xl font-bold mb-2">Hello, Friend!</h2>
-              <div className="border-2 w-10 border-white inline-block mb-2"></div>
-              <p className="mb-10">
-                Fill up personal information and start journey with us.
-              </p>
-              <a
-                href="#"
-                className="border-2 border-white text-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-green-500"
-              >
-                Join us
-              </a>
-            </div>
-          </div>
-          <div className="bg-white flex flex-col items-center p-4 space-y-8 w-full md:w-1/2">
-            {/* welcome */}
-            <div className="flex flex-col items-center">
-              <h1 className="font-medium text-green-400 text-xl">
-                Welcome back
-              </h1>
-              <p>Login to your account</p>
-            </div>
-            {/* inputs */}
-            <form
-              className="flex flex-col items-center space-y-4"
-              onSubmit={handleLogin}
+    
+    <PageLayout>
+    <div className="bg-gradient-to-r from-blue-200 to-cyan-200 flex h-screen items-center justify-center p-4 md:flex">
+      <div className="bg-cover bg-image flex flex-col items-center max-w-screen-lg overflow-hidden rounded-1g shadow-lg text-gray-600 w-full md:flex-row shadow-10xl rounded-2xl">
+        <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2 bg-gradient-to-r from-violet-200 to-pink-200 shadow-10xl">
+          <div className="backdrop-blur-sm backdrop-filter flex flex-col items-center justify-center p-4 text-white w-full md:w-1/2">
+            <h2 className="text-2xl font-bold mb-2">Hello, Friend!</h2>
+            <div className="border-2 w-10 border-white inline-block mb-2"></div>
+            <p className="mb-10">
+              Go to the Join us section for more details
+            </p>
+            <a
+              href="/contact-us"
+              className="border-2 border-white text-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-green-500"
             >
+              Join us
+            </a>
+          </div>
+        </div>
+        <div className="bg-white flex flex-col items-center p-4 space-y-8 w-full md:w-1/2">
+          <div className="flex flex-col items-center">
+            <h1 className="font-medium text-green-400 text-xl">
+              Welcome back
+            </h1>
+            <p>Login to your account</p>
+          </div>
+          <form
+            className="flex flex-col items-center space-y-4"
+            onSubmit={handleLogin}
+          >
               <div className="relative">
                 <span className="absolute flex inset-y-0 items-center pl-4 text-gray-400">
                   <FaUser />
                 </span>
                 <input
-                  className="border border-gray-300 outline-none placeholder-gray-400 p1-9 pr-4 py-1  px-10 rounded-md transition focus:ring-2 focus:ring-green-300"
+                  className=" dark:bg-slate-900 dark:text-white border border-gray-300 outline-none placeholder-gray-400 p1-9 pr-4 py-1  px-10 rounded-md transition focus:ring-2 focus:ring-green-300"
                   placeholder="mobile..."
                   type="text"
                   value={username}
@@ -225,7 +226,7 @@ export default function Home() {
                   <FaLock />
                 </span>
                 <input
-                  className="border border-gray-300 outline-none placeholder-gray-400 p1-9 pr-4 py-1  px-10 rounded-md transition focus:ring-2 focus:ring-green-300"
+                  className="dark:bg-slate-900 dark:text-white border border-gray-300 outline-none placeholder-gray-400 p1-9 pr-4 py-1  px-10 rounded-md transition focus:ring-2 focus:ring-green-300"
                   placeholder="password..."
                   type="password"
                   value={password}
@@ -273,6 +274,7 @@ export default function Home() {
         </div>
       </div>
       <ToastContainer />
-    </>
+    
+    </PageLayout>
   );
 }

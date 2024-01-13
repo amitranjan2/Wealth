@@ -153,7 +153,7 @@ export const CREATE_SEO_CONFIG = (PAGE_SEO: iSEO) => {
   /**
    * We can create SEO Config from
    * ARTICLE_DETAILS or SEO object passed in article list or layout
-   */
+  */
   const router = useRouter();
   const ARTICLE_DETAILS = getArticleDetails();
 

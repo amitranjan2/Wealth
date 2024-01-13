@@ -8,6 +8,7 @@ interface iLinkTo {
     children?: any, 
     external?: boolean, 
     className?: string 
+    
 }
 
 const LinkTo = ({ href, passHref = true, newTab = false, external = false, children, className }: iLinkTo) => {

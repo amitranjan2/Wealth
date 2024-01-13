@@ -78,7 +78,7 @@ const Navbar = () => {
       <nav
         className={combineClasses(
           classes.navbar,
-          " bg-teal-100 dark:bg-slate-900 dark:text-white text-black"
+          " bg-yellow-100 dark:bg-slate-900 dark:text-white text-black"
         )}
       >
         {isMobile ? (

@@ -40,10 +40,11 @@ const SimpleNavbar = ({ openSearch, changeTheme, toggleSideMenu, openSidebar = f
           {
             navLinks.map((each: iNavLink, i: any) => (
               each.type !== 'dropdown' ? !each.newTab ?
-                <LinkTo href={each.path} key={i} passHref className='mx-2'>
+                <LinkTo href={each.path} key={i} passHref   className='mx-13 my-3  hover:text-green-500 shadow-md hover:shadow-lg hover:shadow-pink transition-all mb-3 md:mx-5 transform hover:scale-105'
+                >
                   {each.label}
                 </LinkTo> :
-                <a href={each.path} key={each.path + 1} target="_blank" rel="noopener noreferrer" className='d-block mx-2 flex-wrap'>
+                <a href={each.path} key={each.path + 1} target="_blank" rel="noopener noreferrer" className='d-block mx-2 flex-wrap  '>
                   {each.label}
                 </a>
                 :
@@ -55,7 +56,9 @@ const SimpleNavbar = ({ openSearch, changeTheme, toggleSideMenu, openSidebar = f
             <div className="ml-5 pt-1">
               {
                 socials.map((each: iNavSocials, i: any) => (
-                  <a href={each.link} key={i} target="_blank" rel="noopener noreferrer" className='text-[18px] inline-block mr-4'>{each.icon}</a>
+                  <a href={each.link} key={i} target="_blank" rel="noopener noreferrer" className='text-[20px] inline-block mr-4 hover:text-pink-400 hover:shadow-md transition-all  md:mx-2 transform hover:scale-105'>{each.icon}
+                  
+                  </a>
                 ))
               }
             </div>
@@ -63,11 +66,11 @@ const SimpleNavbar = ({ openSearch, changeTheme, toggleSideMenu, openSidebar = f
         </div>
 
 
-        <div className={combineClasses(classes.search_icon_wrapper, 'ml-5 dark:text-white')} onClick={() => openSearch()}>
+        {/* <div className={combineClasses(classes.search_icon_wrapper, 'ml-5 dark:text-white')} onClick={() => openSearch()}>
           <button name="search-button" aria-label="search button">
             <AiOutlineSearch className="dark:text-white text-black text-[22px]" />
           </button>
-        </div>
+        </div> */}
 
         <div className="" onClick={() => onShareClick()}>
           <button name="share" aria-label="share page">

@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import SkeletonLoader from "./SkeletonLoader";
+
 import {
   PageLayout,
   Text,
@@ -94,7 +94,19 @@ const AllComponents = () => {
 
   const sideBtnsComponents = () => {
     return sideBtns.map((each: any, i: any) => (
-      <div key={each.component + i}>
+      <div
+        key={each.component + i}
+        className={combineClasses(
+          "mb-3",
+          "border-2", // Add a 2px border
+          "border-transparent", // Set initial border color as transparent
+          "transition", // Add transition effect for smooth changes
+          "hover:border-green-300", // Change border color on hover
+          "rounded-md",
+          "p-1", // Add padding
+      // Add margin // Add rounded corners
+        )}
+      >
         {each.types ? (
           <p className="text-xl font-semibold mb-3">{each.component}</p>
         ) : (
@@ -103,31 +115,67 @@ const AllComponents = () => {
             key={each.href}
             className={combineClasses(
               "md:text-xl text-md font-semibold mb-3 block whitespace-nowrap md:mr-0 mr-5",
-              isActive(each.href) && "text-blue-500"
+              isActive(each.href) && "text-green-500" 
             )}
           >
             {each.component}
           </LinkTo>
         )}
-        <div className="mb-3">
-          {each.types &&
-            each.types.map((each: any) => (
-              <LinkTo
-                href={each.href}
-                key={each.href}
-                className={combineClasses(
-                  "block text-gray-500 font-medium py-1 pl-3 border-l",
-                  isActive(each.href) &&
-                    "text-blue-500 border-blue-500 border-l-2"
-                )}
-              >
-                {each.label}
-              </LinkTo>
-            ))}
-        </div>
+      
       </div>
     ));
   };
+
+
+  
+
+  // const sideBtnsComponents = () => {
+  //   return sideBtns.map((each: any, i: any) => (
+  //     <div
+  //       key={each.component + i}
+  //       className={combineClasses(
+  //         "mb-3",
+  //         "border-2", // Add a 2px border
+  //         "border-transparent", // Set initial border color as transparent
+  //         "transition", // Add transition effect for smooth changes
+  //         "rounded-md", // Add rounded corners
+  //         "hover:border-green-300", // Change border color on hover
+  //         "hover:bg-green-300" // Change background color on hover
+  //       )}
+  //     >
+  //       {each.types ? (
+  //         <p className="text-xl font-semibold mb-3">{each.component}</p>
+  //       ) : (
+  //         <LinkTo
+  //           href={each.href}
+  //           key={each.href}
+  //           className={combineClasses(
+  //             "md:text-xl text-md font-semibold mb-3 block whitespace-nowrap md:mr-0 mr-5",
+  //             isActive(each.href) && "text-green-300"
+  //           )}
+  //         >
+  //           {each.component}
+  //         </LinkTo>
+  //       )}
+  //       {each.types &&
+  //         each.types.map((each: any) => (
+  //           <LinkTo
+  //             href={each.href}
+  //             key={each.href}
+  //             className={combineClasses(
+  //               "block text-gray-500 font-medium py-1 pl-3 border-l",
+  //               isActive(each.href) &&
+  //                 "text-blue-500 border-blue-500 border-l-2"
+  //             )}
+  //           >
+  //             {each.label}
+  //           </LinkTo>
+  //         ))}
+  //     </div>
+  //   ));
+  // };
+  
+  
 
   return (
     <PageLayout>
@@ -385,17 +433,26 @@ const AllComponents = () => {
             </section>
 
             <section className={cardBBorder} id="videoPlayer">
-              <Text
-                subtitle
-                className="mb-5 pb-3 border-b md:!text-3xl font-bold"
-              >
-                Video Player
-              </Text>
-              <b>Demo</b>
-              <VideoPlayer url="/public/videos/mov_bbb.mp4" />
-              <b>How to use</b>
-              <CodeBlock code={HowToUseVideo} className="mb-5 mt-3" />
-            </section>
+  <Text
+    subtitle
+    className="mb-5 pb-3 border-b md:!text-3xl font-bold"
+  >
+    Video Player
+  </Text>
+  <b>Demo</b>
+  <div className="relative w-full h-0" style={{ paddingBottom: '56.25%' }}>
+    {/* Use an aspect ratio container */}
+    <iframe 
+      className="absolute top-0 left-0 w-full h-full"
+      src="https://www.youtube.com/embed/1z9KLmJE0sw"
+      frameBorder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowFullScreen
+    ></iframe>
+  </div>
+  <b>How to use</b>
+  <CodeBlock code={HowToUseVideo} className="mb-5 mt-3" />
+</section>
 
             <div className="px-4 py-3 dark:bg-slate-800 bg-blue-200 rounded my-5">
               <Text p className="!text-lg leading-relaxed mb-0">

@@ -8,6 +8,24 @@ import { useEffect, useState } from "react";
 import { iArticle } from "../../shared/interfaces";
 import { AiFillCaretRight, AiFillCaretLeft } from "react-icons/ai";
 
+import { useSpring, animated } from "react-spring";
+
+
+const WelcomeMessage = () => {
+  const props = useSpring({
+    opacity: 1,
+    from: { opacity: 0 },
+    config: { duration: 1000 },
+  });
+
+  return (
+    <animated.div style={props} className="text-center mt-10 mb-5">
+      <h1 className="text-4xl font-bold text-purple-600">Welcome to This Blog!</h1>
+      <p className="text-lg text-gray-600">Explore the latest articles and insights.</p>
+    </animated.div>
+  );
+};
+
 const BlogIndexPage = ({ articlesPerPage = 6 }: { articlesPerPage?: number }) => {
   const router = useRouter();
   const { category, author } = router.query;
@@ -47,6 +65,8 @@ const BlogIndexPage = ({ articlesPerPage = 6 }: { articlesPerPage?: number }) =>
 
   return (
     <PageLayout home>
+
+<WelcomeMessage />
       <div
         className={combineClasses(
           "container mt-10 md:pt-0 px-0 md:px-3",
